@@ -4,7 +4,7 @@ const App = () => {
   const [userChoice, setUserChoice] = createSignal('...')
   const [computerChoice, setComputerChoice] = createSignal('...')
   const [result, setResult] = createSignal('Pick a move')
-  const [isGenerateComputerChoice, setGenerateComputerChoice] = createSignal(false)
+  const [isComputerChoosing, setComputerChoosing] = createSignal(false)
   const moves = ['🪨', '🧻', '✂️']
 
   const handleClick = (value) => {
@@ -14,9 +14,9 @@ const App = () => {
 
   const generateComputerChoice = () => {
     const randomChoice = moves[Math.floor(Math.random() * moves.length)]
-    setGenerateComputerChoice(
+    setComputerChoosing(
       setTimeout(() => {
-        setGenerateComputerChoice(false)
+        setComputerChoosing(false)
         setComputerChoice(randomChoice)
       }, 1000)
     )
@@ -24,7 +24,7 @@ const App = () => {
 
   createEffect(() => {
     {
-      if (isGenerateComputerChoice()) {
+      if (isComputerChoosing()) {
         setResult('Computer is \'thinking\'...')
         return
       }
