@@ -22,3 +22,6 @@ Your app is ready to be deployed!
 ## Deployment
 
 You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/672c2a83-e236-4988-8ff5-c1fdcaa42bf9/deploy-status)](https://solidjs-rock-paper-scissors.netlify.app)
