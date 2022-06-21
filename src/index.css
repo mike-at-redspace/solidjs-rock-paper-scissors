@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(29, 30, 34);
+  color: white;
 }
 
 code {
@@ -21,6 +23,22 @@ code {
   height: 100vh;
 }
 
+.wrap {
+  width: 360px;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.moves {
+  display: flex;
+  justify-content: space-between;
+}
+
 button {
-  font-size: 200%;
+  font-size: 3rem;
+  border: none;
+  background: transparent;
 }

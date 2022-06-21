@@ -4,7 +4,8 @@ const App = () => {
   const [userChoice, setUserChoice] = createSignal('...')
   const [computerChoice, setComputerChoice] = createSignal('...')
   const [result, setResult] = createSignal('Pick a move')
-  const choices = ['🪨', '🧻', '✂️']
+  const [isGenerateComputerChoice, setGenerateComputerChoice] = createSignal(false)
+  const moves = ['🪨', '🧻', '✂️']
 
   const handleClick = (value) => {
     setUserChoice(value)
@@ -12,12 +13,21 @@ const App = () => {
   }
 
   const generateComputerChoice = () => {
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)]
-    setComputerChoice(randomChoice)
+    const randomChoice = moves[Math.floor(Math.random() * moves.length)]
+    setGenerateComputerChoice(
+      setTimeout(() => {
+        setGenerateComputerChoice(false)
+        setComputerChoice(randomChoice)
+      }, 1000)
+    )
   }
 
   createEffect(() => {
     {
+      if (isGenerateComputerChoice()) {
+        setResult('Computer is \'thinking\'...')
+        return
+      }
       switch (userChoice() + computerChoice()) {
         case '✂️🧻':
         case '🪨✂️':
@@ -41,15 +51,17 @@ const App = () => {
   })
 
   return (
-    <div>
-      <h1>userChoice: {userChoice()}</h1>
-      <h1>computerChoice: {computerChoice()}</h1>
-      {choices.map((choice, index) =>
-        <button key={index} onClick={() => handleClick(choice)}>
-          {choice()}
-        </button>
-      )}
-      <h1>{result()}</h1>
+    <div class="wrap">
+      <h2>userChoice: {userChoice()}</h2>
+      <h2>computerChoice: {computerChoice()}</h2>
+      <div class="moves">
+        {moves.map((move, index) =>
+          <button key={index} onClick={() => handleClick(move)}>
+            {move}
+          </button>
+        )}
+      </div>
+      <h2>{result()}</h2>
     </div>
   )
 }
