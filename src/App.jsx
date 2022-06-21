@@ -42,8 +42,8 @@ const App = () => {
 
   return (
     <div>
-      <h1>userChoice is: {userChoice()}</h1>
-      <h1>computerChoice is: {computerChoice()}</h1>
+      <h1>userChoice: {userChoice()}</h1>
+      <h1>computerChoice: {computerChoice()}</h1>
       {choices.map((choice, index) =>
         <button key={index} onClick={() => handleClick(choice)}>
           {choice()}
