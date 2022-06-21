@@ -1,10 +1,10 @@
 import { createSignal, createEffect } from "solid-js";
 
 const App = () => {
-  const [userChoice, setUserChoice] = createSignal(null)
-  const [computerChoice, setComputerChoice] = createSignal(null)
+  const [userChoice, setUserChoice] = createSignal('...')
+  const [computerChoice, setComputerChoice] = createSignal('...')
   const [result, setResult] = createSignal('Pick a move')
-  const choices = ['rock', 'paper', 'scissors']
+  const choices = ['🪨', '🧻', '✂️']
 
   const handleClick = (value) => {
     setUserChoice(value)
@@ -19,29 +19,31 @@ const App = () => {
   createEffect(() => {
     {
       switch (userChoice() + computerChoice()) {
-        case 'scissorspaper':
-        case 'rockscissors':
-        case 'paperrock':
-          setResult('YOU WIN!')
+        case '✂️🧻':
+        case '🪨✂️':
+        case '🧻🪨':
+          setResult('YOU WIN! 🏆')
           break
-        case 'paperscissors':
-        case 'scissorsrock':
-        case 'rockpaper':
-          setResult('YOU LOSE!')
+        case '🧻✂️':
+        case '✂️🪨':
+        case '🪨🧻':
+          setResult('YOU LOSE! 😧')
           break
-        case 'rockrock':
-        case 'paperpaper':
-        case 'scissorsscissors':
-          setResult('ITS A DRAW!')
+        case '🪨🪨':
+        case '🧻🧻':
+        case '✂️✂️':
+          setResult('ITS A DRAW! ✌️')
           break
+        default:
+          setResult('Pick a move')
       }
     }
   })
 
   return (
     <div>
-      <h1>user choice is: {userChoice()}</h1>
-      <h1>computer choice is: {computerChoice()}</h1>
+      <h1>userChoice is: {userChoice()}</h1>
+      <h1>computerChoice is: {computerChoice()}</h1>
       {choices.map((choice, index) =>
         <button key={index} onClick={() => handleClick(choice)}>
           {choice()}
