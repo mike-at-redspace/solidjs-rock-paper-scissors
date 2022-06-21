@@ -7,21 +7,6 @@ const App = () => {
   const [isComputerChoosing, setComputerChoosing] = createSignal(false)
   const moves = ['🪨', '🧻', '✂️']
 
-  const handleClick = (value) => {
-    setUserChoice(value)
-    generateComputerChoice()
-  }
-
-  const generateComputerChoice = () => {
-    const randomChoice = moves[Math.floor(Math.random() * moves.length)]
-    setComputerChoosing(
-      setTimeout(() => {
-        setComputerChoosing(false)
-        setComputerChoice(randomChoice)
-      }, 1000)
-    )
-  }
-
   createEffect(() => {
     {
       if (isComputerChoosing()) {
@@ -50,13 +35,28 @@ const App = () => {
     }
   })
 
+  const generateComputerChoice = () => {
+    const randomChoice = moves[Math.floor(Math.random() * moves.length)]
+    setComputerChoosing(
+      setTimeout(() => {
+        setComputerChoosing(false)
+        setComputerChoice(randomChoice)
+      }, 1000)
+    )
+  }
+
+  const handleClick = ({ currentTarget }) => {
+    setUserChoice(currentTarget.textContent)
+    generateComputerChoice()
+  }
+
   return (
     <div class="wrap">
       <h2>userChoice: {userChoice()}</h2>
       <h2>computerChoice: {computerChoice()}</h2>
       <div class="moves">
         {moves.map((move, index) =>
-          <button key={index} onClick={() => handleClick(move)}>
+          <button key={index} onClick={handleClick}>
             {move}
           </button>
         )}
